@@ -31,7 +31,9 @@
 #define  CYAN    0x07FF
 #define  MAGENTA 0xF81F
 #define  YELLOW  0xFFE0
+#define  GREY    0x7BEF
 #define  WHITE   0xFFFF
+
 
 Adafruit_TFTLCD tft(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
 
@@ -58,7 +60,7 @@ void setup(void) {
 
 void write_number(int x, int y, String name, double num, int colour) {
   tft.fillRect(x * 160, y * 120, x * 160 + 160, y * 120 + 120, BLACK);
-  tft.drawRect(x * 160 + 1, y * 120 + 1, x * 160 + 160 - 1, y * 120 + 120 - 1, colour);
+  tft.drawRect(x * 160 + 2, y * 120 + 2, x * 160 + 160 - 2, y * 120 + 120 - 2, colour);
   tft.setCursor(x * 160 + 5, y * 120 + 30);
   tft.setTextColor(colour);
   tft.setFont(&FreeMonoBold12pt7b);
@@ -78,7 +80,7 @@ void loop() {
     write_number(0, 0,
                  "Depth",
                  atof(depthBT.value()) + atof(depthOFFSET.value()),
-                 YELLOW);
+                 WHITE);
   }
 
   
@@ -86,12 +88,12 @@ void loop() {
     write_number(0, 1,
                  "AWS",
                  atof(windAWS.value()),
-                 RED);
+                 WHITE);
   }
 
  
-  write_number(1, 0, "LAT",   random(0,  600) / 10.0, BLUE);
-  write_number(1, 1, "LON",   random(0,  600) / 10.0, GREEN);
+  write_number(1, 0, "LAT",   random(0,  600) / 10.0, WHITE);
+  write_number(1, 1, "LON",   random(0,  600) / 10.0, WHITE);
 
   delay(300);
 }
